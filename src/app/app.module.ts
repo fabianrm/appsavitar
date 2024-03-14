@@ -19,7 +19,7 @@ import { AuthModule } from './auth/auth.module';
     NgbModule,
     NavigationModule,
     CustomerModule,
-   AuthModule
+    AuthModule
 
   ],
   providers: [
