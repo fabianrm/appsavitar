@@ -59,14 +59,11 @@ export class CustomerListComponent implements OnInit, OnDestroy {
   }
 
   openDialog(row: any) {
-    //  this.getSeleccionados();
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '40%';
-    //dialogConfig.data = row;
-    // dialogConfig.data = [row, this.ids, this.filasSel];
 
     this.dialog.open(CustomerCreateComponent, dialogConfig);
 

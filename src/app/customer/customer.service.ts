@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable, Subject, pipe, tap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ReqCustomer } from './Models/ResponseCustomer';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,13 @@ export class CustomerService {
 
   getCustomersPipe(): Observable<any> {
     return this.clienteHttp.get(this.API + 'customers', { headers: this.headers })
+      .pipe(tap(() => {
+        this._refresh$.next()
+      }));
+  }
+
+  AgregarCliente(datos: ReqCustomer): Observable<any> {
+    return this.clienteHttp.post(this.API + 'customers', datos, { headers: this.headers })
       .pipe(tap(() => {
         this._refresh$.next()
       }));

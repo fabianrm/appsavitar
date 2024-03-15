@@ -1,10 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CustomerCreateComponent } from './customer-create/customer-create.component';
-import { CustomerListComponent } from './customer-list/customer-list.component';
-import { CustomerDetailsComponent } from './customer-details/customer-details.component';
-import { CustomerEditComponent } from './customer-edit/customer-edit.component';
-import { CustomerRoutingModule } from './customer-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -18,6 +13,15 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatOptionModule } from '@angular/material/core';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { CustomerCreateComponent } from './customer-create/customer-create.component';
+import { CustomerListComponent } from './customer-list/customer-list.component';
+import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+import { CustomerEditComponent } from './customer-edit/customer-edit.component';
+import { CustomerRoutingModule } from './customer-routing.module';
+
 
 @NgModule({
   declarations: [
@@ -46,8 +50,10 @@ import { MatOptionModule } from '@angular/material/core';
     MatCardTitle,
     MatInputModule,
     MatSelectModule,
-    MatOptionModule
-  
+    MatOptionModule,
+    MatSlideToggleModule,
+    ReactiveFormsModule,
+    FormsModule,
 
   ]
 })

@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ThemePalette } from '@angular/material/core';
+import { CustomerService } from './../customer.service';
 
 interface Tipo {
   value: string;
@@ -18,9 +20,20 @@ interface Tipo {
 
 export class CustomerCreateComponent implements OnInit {
 
-  formularioAsignar!: FormGroup;
+  formCliente!: FormGroup;
+  color: ThemePalette = 'accent';
+  checked = true;
+  disabled = false;
+
+  tipos: Tipo[] = [
+    { value: 'natural', viewValue: 'Natural' },
+    { value: 'juridica', viewValue: 'Juridica' },
+  ]
+
+
 
   constructor(public formulario: FormBuilder,
+    private customerService: CustomerService,
     @Inject(MAT_DIALOG_DATA) public getData: any,
     private _snackBar: MatSnackBar,
     private dialogRef: MatDialogRef<CustomerCreateComponent>) { }
@@ -30,18 +43,36 @@ export class CustomerCreateComponent implements OnInit {
   }
 
   initForm() {
-    this.formularioAsignar = this.formulario.group({
-      id_video: [],
-      id_inspector: ['', Validators.required],
-      estado: ['P'],
-      comentario: ['']
+    this.formCliente = this.formulario.group({
+      type: ['', Validators.required],
+      documentNumber: ['', Validators.required],
+      name: ['', Validators.required],
+      address: ['', Validators.required],
+      phoneNumber: [''],
+      email: [''],
+      status: [true],
     });
   }
 
-  tipos: Tipo[] = [
-    { value: 'natural', viewValue: 'Natural' },
-    { value: 'juridica', viewValue: 'Juridica' },
-  ]
+  enviarDatos() {
+    if (this.formCliente.valid) {
+      this.customerService.AgregarCliente(this.formCliente.value).subscribe(respuesta => {
+        this.msgSusscess('Cliente agregado correctamente');
+        this.dialogRef.close();
+       // console.log(respuesta);
+      });
+    }
+  }
+
+  msgSusscess(mensaje: string) {
+    this._snackBar.open(mensaje, 'SAVITAR', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'bottom'
+    })
+  }
+
+
 
 
 
