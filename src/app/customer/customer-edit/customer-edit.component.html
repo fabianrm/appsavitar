@@ -66,7 +66,7 @@
 
     <mat-card-actions>
       <div class="row-buttons">
-        <button color="primary" mat-raised-button style="margin-right: 5px">
+        <button [disabled]="formEditar.invalid" color="primary" mat-raised-button style="margin-right: 5px">
           Guardar
         </button>
         <button mat-dialog-close="" color="accent" mat-raised-button>

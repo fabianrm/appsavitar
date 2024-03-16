@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -20,17 +20,18 @@ interface Tipo {
 
 export class CustomerCreateComponent implements OnInit {
 
+ // @ViewChild('documentNumber') documentNumber: ElementRef | undefined;
+
   formCliente!: FormGroup;
   color: ThemePalette = 'accent';
   checked = true;
   disabled = false;
+  selected = 'natural';
 
   tipos: Tipo[] = [
     { value: 'natural', viewValue: 'Natural' },
     { value: 'juridica', viewValue: 'Juridica' },
   ]
-
-
 
   constructor(public formulario: FormBuilder,
     private customerService: CustomerService,
@@ -40,11 +41,13 @@ export class CustomerCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+   // this.documentNumber!.nativeElement.focus();
   }
+
 
   initForm() {
     this.formCliente = this.formulario.group({
-      type: ['', Validators.required],
+      type: [this.selected, Validators.required],
       documentNumber: ['', Validators.required],
       name: ['', Validators.required],
       address: ['', Validators.required],
@@ -59,7 +62,7 @@ export class CustomerCreateComponent implements OnInit {
       this.customerService.addCustomer(this.formCliente.value).subscribe(respuesta => {
         this.msgSusscess('Cliente agregado correctamente');
         this.dialogRef.close();
-       // console.log(respuesta);
+        // console.log(respuesta);
       });
     }
   }
