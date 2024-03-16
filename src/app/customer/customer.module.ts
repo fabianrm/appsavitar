@@ -48,7 +48,6 @@ import { CustomerRoutingModule } from './customer-routing.module';
     MatCardContent,
     MatCardHeader,
     MatCardTitle,
-    MatInputModule,
     MatSelectModule,
     MatOptionModule,
     MatSlideToggleModule,

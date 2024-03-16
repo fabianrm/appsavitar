@@ -7,11 +7,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CustomerModule } from './customer/customer.module';
 import { NavigationModule } from './navigation/navigation.module';
 import { AuthModule } from './auth/auth.module';
+import { BoxModule } from './box/box.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -19,7 +21,8 @@ import { AuthModule } from './auth/auth.module';
     NgbModule,
     NavigationModule,
     CustomerModule,
-    AuthModule
+    AuthModule,
+    BoxModule
 
   ],
   providers: [
