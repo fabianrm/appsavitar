@@ -20,7 +20,7 @@ export class CustomerEditComponent implements OnInit {
 
   formEditar!: FormGroup;
   color: ThemePalette = 'accent';
-  checked = true;
+  checked = (this.getData.status == 1) ? true : false;
   disabled = false;
 
   id_customer = this.getData.id;
@@ -43,7 +43,6 @@ export class CustomerEditComponent implements OnInit {
 
 
   initForm() {
-
     this.formEditar = this.formulario.group({
       id: [this.getData.id, Validators.required],
       type: [this.getData.type, Validators.required],
@@ -52,7 +51,7 @@ export class CustomerEditComponent implements OnInit {
       address: [this.getData.address, Validators.required],
       phoneNumber: [this.getData.phone_number],
       email: [this.getData.email],
-      status: [true],
+      status: [this.checked],
     });
   }
 

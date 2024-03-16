@@ -65,7 +65,7 @@ export class CustomerListComponent implements OnInit, OnDestroy {
   getCustomerById(id: number) {
     this.customerService.getCustomerByID(id).subscribe(respuesta => {
       this.respuesta = respuesta;
-    //  console.log(respuesta);
+      //  console.log(respuesta);
     });
   }
 
@@ -86,9 +86,9 @@ export class CustomerListComponent implements OnInit, OnDestroy {
 
     this.customerService.getCustomerByID(id).subscribe(respuesta => {
       this.respuesta = respuesta.data;
-  
+
       if (respuesta.data) {
-       
+
         const dialogConfig = new MatDialogConfig();
 
         dialogConfig.disableClose = true;
