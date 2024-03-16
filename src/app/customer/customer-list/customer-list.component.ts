@@ -7,6 +7,8 @@ import { CCustomer } from '../Models/CCustomer';
 import { Subscription } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { CustomerCreateComponent } from '../customer-create/customer-create.component';
+import { CustomerEditComponent } from '../customer-edit/customer-edit.component';
+import { ReqCustomer } from '../Models/ResponseCustomer';
 
 @Component({
   selector: 'app-customer-list',
@@ -31,6 +33,8 @@ export class CustomerListComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort!: MatSort;
 
   subscription!: Subscription
+
+  public respuesta?: ReqCustomer;
 
 
   constructor(private customerService: CustomerService, public dialog: MatDialog) { }
@@ -58,6 +62,13 @@ export class CustomerListComponent implements OnInit, OnDestroy {
     });
   }
 
+  getCustomerById(id: number) {
+    this.customerService.getCustomerByID(id).subscribe(respuesta => {
+      this.respuesta = respuesta;
+    //  console.log(respuesta);
+    });
+  }
+
   openDialog(row: any) {
     const dialogConfig = new MatDialogConfig();
 
@@ -68,11 +79,37 @@ export class CustomerListComponent implements OnInit, OnDestroy {
     this.dialog.open(CustomerCreateComponent, dialogConfig);
 
     this.dialog.afterAllClosed.subscribe(() => {
-      // this.ids = [];
-      //this.ids.length = 0;
-      //  this.selection.clear()
     })
   }
+
+  openEditDialog(id: number) {
+
+    this.customerService.getCustomerByID(id).subscribe(respuesta => {
+      this.respuesta = respuesta.data;
+  
+      if (respuesta.data) {
+       
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = '40%';
+        dialogConfig.data = this.respuesta;
+
+        this.dialog.open(CustomerEditComponent, dialogConfig);
+        this.dialog.afterAllClosed.subscribe(() => { })
+      }
+
+      // console.log(respuesta);
+    });
+
+
+
+
+
+  }
+
+
 
 
 }

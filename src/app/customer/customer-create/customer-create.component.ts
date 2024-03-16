@@ -56,7 +56,7 @@ export class CustomerCreateComponent implements OnInit {
 
   enviarDatos() {
     if (this.formCliente.valid) {
-      this.customerService.AgregarCliente(this.formCliente.value).subscribe(respuesta => {
+      this.customerService.addCustomer(this.formCliente.value).subscribe(respuesta => {
         this.msgSusscess('Cliente agregado correctamente');
         this.dialogRef.close();
        // console.log(respuesta);

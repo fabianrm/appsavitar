@@ -33,8 +33,23 @@ export class CustomerService {
       }));
   }
 
-  AgregarCliente(datos: ReqCustomer): Observable<any> {
+  addCustomer(datos: ReqCustomer): Observable<any> {
     return this.clienteHttp.post(this.API + 'customers', datos, { headers: this.headers })
+      .pipe(tap(() => {
+        this._refresh$.next()
+      }));
+  }
+
+
+  updateCustomer(id: number, datos: ReqCustomer): Observable<any> {
+    return this.clienteHttp.put(this.API + 'customers/' + id, datos, { headers: this.headers })
+      .pipe(tap(() => {
+        this._refresh$.next()
+      }));
+  }
+
+  getCustomerByID(id: number): Observable<any> {
+    return this.clienteHttp.get(this.API + 'customers/' + id, { headers: this.headers })
       .pipe(tap(() => {
         this._refresh$.next()
       }));
