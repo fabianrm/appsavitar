@@ -77,9 +77,9 @@ export class BoxListComponent {
 
     this.boxService.getBoxByID(id).subscribe(respuesta => {
       this.respuesta = respuesta.data;
+      console.log(respuesta);
 
       if (respuesta.data) {
-
         const dialogConfig = new MatDialogConfig();
 
         dialogConfig.disableClose = true;
@@ -91,7 +91,7 @@ export class BoxListComponent {
         this.dialog.afterAllClosed.subscribe(() => { })
       }
 
-      // console.log(respuesta);
+
     });
   }
 
