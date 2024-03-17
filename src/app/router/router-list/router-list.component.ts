@@ -17,7 +17,7 @@ import { RouterService } from '../router.service';
   styleUrl: './router-list.component.css'
 })
 export class RouterListComponent {
-  displayedColumns: string[] = ['id', 'ip', 'usuario', 'password', 'port', 'apiConnection', 'status', 'acciones'];
+  displayedColumns: string[] = ['id', 'ip', 'usuario', 'password', 'port', 'api_connection', 'status', 'acciones'];
   public dataSource!: MatTableDataSource<CRouter[]>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
