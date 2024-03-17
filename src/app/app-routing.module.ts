@@ -17,7 +17,12 @@ const routes: Routes = [
       {
         path: 'box',
         loadChildren: () => import('./box/box.module').then(m => m.BoxModule)
+      },
+      {
+        path: 'router',
+        loadChildren: () => import('./router/router.module').then(m => m.RouterModule)
       }
+
     ]
   }
 ];

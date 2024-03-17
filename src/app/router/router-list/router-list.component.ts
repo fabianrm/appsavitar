@@ -1,24 +1,24 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { ReqBox } from '../Models/ResponseBox';
+import { CRouter } from '../Models/CRouter';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Subscription } from 'rxjs';
+import { ReqBox } from '../../box/Models/ResponseBox';
+import { BoxService } from '../../box/box.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { BoxService } from '../box.service';
-import { BoxCreateComponent } from '../box-create/box-create.component';
-import { BoxEditComponent } from '../box-edit/box-edit.component';
-import { CBox } from '../Models/CBox';
+import { RouterCreateComponent } from '../router-create/router-create.component';
+import { RouterEditComponent } from '../router-edit/router-edit.component';
+import { RouterService } from '../router.service';
 
 @Component({
-  selector: 'app-box-list',
-  templateUrl: './box-list.component.html',
-  styleUrl: './box-list.component.css'
+  selector: 'app-router-list',
+  templateUrl: './router-list.component.html',
+  styleUrl: './router-list.component.css'
 })
-export class BoxListComponent {
-
-  displayedColumns: string[] = ['id', 'city', 'address', 'reference', 'latitude', 'longitude', 'total_ports', 'available_ports', 'status', 'acciones'];
-  public dataSource!: MatTableDataSource<CBox[]>;
+export class RouterListComponent {
+  displayedColumns: string[] = ['id', 'ip', 'usuario', 'password', 'port', 'apiConnection', 'status', 'acciones'];
+  public dataSource!: MatTableDataSource<CRouter[]>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -27,11 +27,11 @@ export class BoxListComponent {
 
   public respuesta?: ReqBox;
 
-  constructor(private boxService: BoxService, public dialog: MatDialog) { }
+  constructor(private routerService: RouterService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getBoxes();
-    this.subscription = this.boxService.refresh$.subscribe(() => {
+    this.subscription = this.routerService.refresh$.subscribe(() => {
       this.getBoxes()
     });
 
@@ -41,7 +41,7 @@ export class BoxListComponent {
   }
 
   getBoxes() {
-    this.boxService.getBoxes().subscribe((respuesta) => {
+    this.routerService.getRouters().subscribe((respuesta) => {
 
       if (respuesta.data.length > 0) {
         this.dataSource = new MatTableDataSource(respuesta.data);
@@ -54,7 +54,7 @@ export class BoxListComponent {
 
 
   getBoxById(id: number) {
-    this.boxService.getBoxByID(id).subscribe(respuesta => {
+    this.routerService.getRouterByID(id).subscribe(respuesta => {
       this.respuesta = respuesta;
       //  console.log(respuesta);
     });
@@ -66,7 +66,7 @@ export class BoxListComponent {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '40%';
-    this.dialog.open(BoxCreateComponent, dialogConfig);
+    this.dialog.open(RouterCreateComponent, dialogConfig);
 
     this.dialog.afterAllClosed.subscribe(() => {
     })
@@ -75,12 +75,11 @@ export class BoxListComponent {
 
   openEditDialog(id: number) {
 
-    this.boxService.getBoxByID(id).subscribe(respuesta => {
+    this.routerService.getRouterByID(id).subscribe(respuesta => {
       this.respuesta = respuesta.data;
       console.log(respuesta);
-      
-      if (respuesta.data) {
 
+      if (respuesta.data) {
         const dialogConfig = new MatDialogConfig();
 
         dialogConfig.disableClose = true;
@@ -88,18 +87,12 @@ export class BoxListComponent {
         dialogConfig.width = '40%';
         dialogConfig.data = this.respuesta;
 
-        this.dialog.open(BoxEditComponent, dialogConfig);
+        this.dialog.open(RouterEditComponent, dialogConfig);
         this.dialog.afterAllClosed.subscribe(() => { })
       }
 
 
     });
-  }
-
-
-  goToLinkMap(latitude: string, longitude: string) {
-    //'https://www.google.com/maps?q=-4.907545,-81.057223&hl=es-Pe&gl=pe&shorturl=1;'
-    window.open(`https://www.google.com/maps?q=${latitude},${longitude}&hl=es-Pe&gl=pe&shorturl=1;`, "_blank");
   }
 
   applyFilter(event: Event) {
@@ -110,5 +103,4 @@ export class BoxListComponent {
       this.dataSource.paginator.firstPage();
     }
   }
-
 }

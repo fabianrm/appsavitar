@@ -23,15 +23,15 @@
 
       <mat-list-item>
         <mat-icon matListItemIcon>router</mat-icon>
-        <span matListItemTitle>Routers</span>
+        <span matListItemTitle
+          ><a [routerLink]="['/dashboard/router/routers']">Routers</a></span
+        >
       </mat-list-item>
 
       <mat-list-item>
         <mat-icon matListItemIcon>inbox</mat-icon>
         <span matListItemTitle
-          ><a [routerLink]="['/dashboard/box/boxes']"
-            >Cajas</a
-          ></span
+          ><a [routerLink]="['/dashboard/box/boxs']">Cajas</a></span
         >
       </mat-list-item>
       <mat-list-item>

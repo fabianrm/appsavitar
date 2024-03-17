@@ -5,7 +5,7 @@ import { BoxCreateComponent } from './box-create/box-create.component';
 import { BoxEditComponent } from './box-edit/box-edit.component';
 
 const routes: Routes = [
-  { path: 'boxes', component: BoxListComponent },
+  { path: 'boxs', component: BoxListComponent },
   { path: 'boxCreate', component: BoxCreateComponent },
   { path: 'boxEdit/:id', component: BoxEditComponent },
 ];

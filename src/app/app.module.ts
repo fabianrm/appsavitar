@@ -8,6 +8,7 @@ import { CustomerModule } from './customer/customer.module';
 import { NavigationModule } from './navigation/navigation.module';
 import { AuthModule } from './auth/auth.module';
 import { BoxModule } from './box/box.module';
+import { RouterModule } from './router/router.module';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { BoxModule } from './box/box.module';
     NavigationModule,
     CustomerModule,
     AuthModule,
-    BoxModule
+    BoxModule,
+    RouterModule
 
   ],
   providers: [
