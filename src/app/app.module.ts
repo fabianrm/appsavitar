@@ -9,6 +9,7 @@ import { NavigationModule } from './navigation/navigation.module';
 import { AuthModule } from './auth/auth.module';
 import { BoxModule } from './box/box.module';
 import { RouterModule } from './router/router.module';
+import { PlanModule } from './plan/plan.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { RouterModule } from './router/router.module';
     CustomerModule,
     AuthModule,
     BoxModule,
-    RouterModule
+    RouterModule,
+    PlanModule
 
   ],
   providers: [
