@@ -48,7 +48,7 @@ export class BoxCreateComponent {
   enviarDatos() {
     if (this.formBox.valid) {
       this.boxService.addBox(this.formBox.value).subscribe(respuesta => {
-        this.msgSusscess('Cliente agregado correctamente');
+        this.msgSusscess('Caja agregada correctamente');
         this.dialogRef.close();
         // console.log(respuesta);
       });
