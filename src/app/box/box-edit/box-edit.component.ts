@@ -1,9 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
-import { BoxService } from '../box.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { BoxService } from '../box.service';
 import { ReqBox } from '../Models/ResponseBox';
 
 @Component({
@@ -25,14 +25,15 @@ export class BoxEditComponent {
     private dialogRef: MatDialogRef<BoxEditComponent>) { }
 
 
+
   ngOnInit(): void {
     this.initForm();
     // this.documentNumber!.nativeElement.focus();
   }
 
   initForm() {
-    this.formEditBox = this.formulario.group({
 
+    this.formEditBox = this.formulario.group({
       id: [this.getData.id, Validators.required],
       city: [this.getData.city, Validators.required],
       address: [this.getData.address, Validators.required],
@@ -42,8 +43,10 @@ export class BoxEditComponent {
       totalPorts: [this.getData.total_ports],
       availablePorts: [this.getData.available_ports],
       status: [this.checked],
+
     });
   }
+
 
 
   enviarDatos(id:number) {
