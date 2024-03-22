@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { BoxModule } from './box/box.module';
 import { RouterModule } from './router/router.module';
 import { PlanModule } from './plan/plan.module';
+import { ContractModule } from './contract/contract.module';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { PlanModule } from './plan/plan.module';
     AuthModule,
     BoxModule,
     RouterModule,
-    PlanModule
+    PlanModule,
+    ContractModule
 
   ],
   providers: [
