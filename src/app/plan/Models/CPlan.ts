@@ -1,7 +1,7 @@
 import { ReqPlan } from "./ResponsePlan"
 
 export class CPlan {
-    static boxJSon(obj: ReqPlan) {
+    static planJSon(obj: ReqPlan) {
         return new CPlan(
             obj.id,
             obj.name,
